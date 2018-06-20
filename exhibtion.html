@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 定时刷新网页 -->
+    <!-- <meta http-equiv="refresh" content="10"> -->
+    <title>展厅项目</title>
+    <link rel="stylesheet" href="css/ne.css">
+    <link rel="stylesheet" href="css/zt.css">
+    <link rel="stylesheet" href="css/liMarquee.css">
+</head>
+<body>
+        <div class="title">
+                <p class="h_title">金卡NB-IOT智慧燃气表抄表率监控屏</p>
+                <p class="t_p">
+                        <span class="t_p_xian"></span>
+                        <span class="f_p_font">燃气公司抄表率实时监测</span>  
+                </p>
+                <div class="time">
+                    <p class="time_font">数据统计截止时间</p>
+                    <p id="newtime"></p>
+                </div>
+        </div>
+        <div style="display: flex;flex-flow: column;width:100%;height:calc(100% - 75px)">
+            <div style="flex-flow:row wrap;width:100%;background:#062a40;height:197px;">
+                <div style="width:98%;height:99%;display:flex;flex-flow:row;margin:0 auto;border-top:1px solid #ccc;">
+                      <div style="flex-flow:column;width:35%;height:100%;">
+                              <div class="m_wrap_left">
+                                      <p class="m_wrap_left_f">NB-IOT抄表率</p>
+                                      <div id="gauge"></div>
+                                      <div class="m_wrap_left_d">
+                                          <ul class="m_wrap_left_d_u" id="cB">
+                                              <li><span class="m_wrap_left_d_u_fn m_wrap_left_d_u_fn02">客户数量</span><span class="m_wrap_left_d_u_fs m_wrap_left_d_u_fs02" id="company_count"></span></li>
+                                              <li><span class="m_wrap_left_d_u_fn m_wrap_left_d_u_fn02">总发货量</span><span class="m_wrap_left_d_u_fs m_wrap_left_d_u_fs02" id="deliver_count"></span></li>
+                                              <li><span class="m_wrap_left_d_u_fn">休眠表数</span><span class="m_wrap_left_d_u_fs" id="sleep_count"></span></li>
+                                              <li><span class="m_wrap_left_d_u_fn">总开户量</span><span class="m_wrap_left_d_u_fs" id="open_count"></span></li>
+                                              <li><span class="m_wrap_left_d_u_fn">抄表总数</span><span class="m_wrap_left_d_u_fs" id="real_count"></span></li>
+                                          </ul>
+                                      </div>
+                                      <div class="compare">
+                                        <!-- <p class="m_wrap_left_font">相比昨日:0.04%</p> -->
+                                      </div>
+                                    </div>
+                      </div>
+                    <div style="flex-flow:column wrap;width:65%;">
+                            <div class="m_wrap_right">
+                                    <p class="m_wrap_left_f m_wrap_right_f">30日抄表率折线图</p>
+                                    <div id="line"></div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="flex-flow:row wrap;width:100%;background:#062a40;height:135px;">
+                    <div style="width:98%;height:100%;display:flex;flex-flow:row;margin:0 auto;">
+                            <div style="flex-flow:column wrap;flex:1">
+                                    <div class="m_bottom_d1">
+                                            <div class="m_bottom_d1_d1">
+                                                <span>抄表率排名TOP10</span>
+                                            </div>
+                                            <div class="m_bottom_d1_d2">
+                                                <span class="m_bottom_d1_d2_f1">排名</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f2">燃气公司</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f3">抄表值</span>
+                                                <div class="dowebok" id="cbl">
+                                                  <ul class="dowebok_u" id="cbltop">
+                                                          <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">1</li>
+                                                                  <li class="dowebok_x dowebok_x2"></li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                    <span class="dowebok_x3_react"></span>
+                                                                    <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                                  <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">2</li>
+                                                                      <li class="dowebok_x dowebok_x2 "></li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                  </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                                  <ul class="dowebok_u">
+                                                                    <li class="dowebok_x">3</li>
+                                                                    <li class="dowebok_x dowebok_x2"></li>
+                                                                    <li class="dowebok_x dowebok_x3">
+                                                                        <span class="dowebok_x3_react"></span>
+                                                                        <span class="sanjiao"></span> 
+                                                                    </li>
+                                                                  </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                                  <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">4</li>
+                                                                      <li class="dowebok_x dowebok_x2">
+                                                                    </li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                  </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                                  <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">5</li>
+                                                                      <li class="dowebok_x dowebok_x2">
+                                                                    </li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                  </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                                  <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">6</li>
+                                                                      <li class="dowebok_x dowebok_x2">
+                                                                    </li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                  </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                            <ul class="dowebok_u">
+                                                                <li class="dowebok_x">7</li>
+                                                                <li class="dowebok_x dowebok_x2 cblname">
+                                                              </li>
+                                                                <li class="dowebok_x dowebok_x3">
+                                                                    <span class="dowebok_x3_react"></span>
+                                                                    <span class="sanjiao"></span> 
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dowebok_u_li">
+                                                            <ul class="dowebok_u">
+                                                                <li class="dowebok_x">8</li>
+                                                                <li class="dowebok_x dowebok_x2 cblname">
+                                                              </li>
+                                                                <li class="dowebok_x dowebok_x3">
+                                                                    <span class="dowebok_x3_react"></span>
+                                                                    <span class="sanjiao"></span> 
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="dowebok_u_li">
+                                                            <ul class="dowebok_u">
+                                                                <li class="dowebok_x">9</li>
+                                                                <li class="dowebok_x dowebok_x2 cblname">
+                                                              </li>
+                                                                <li class="dowebok_x dowebok_x3">
+                                                                    <span class="dowebok_x3_react"></span>
+                                                                    <span class="sanjiao"></span> 
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                     
+                                                      <li class="dowebok_u_li">
+                                                        <ul class="dowebok_u">
+                                                            <li class="dowebok_x">10</li>
+                                                            <li class="dowebok_x dowebok_x2 cblname">
+                                                          </li>
+                                                            <li class="dowebok_x dowebok_x3">
+                                                                <span class="dowebok_x3_react"></span>
+                                                                <span class="sanjiao"></span> 
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                  </ul>
+                                                  </div>
+                                            </div>
+                                    </div>
+                            </div>
+
+                            <div style="flex-flow:column wrap;flex:1">
+                                    <div class="m_bottom_d1 m_bottom_d2">
+                                            <div class="m_bottom_d1_d1">
+                                                <span>发货总量TOP10</span>
+                                            </div>
+                                            <div class="m_bottom_d1_d2">
+                                                <span class="m_bottom_d1_d2_f1">排名</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f2">燃气公司</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f3">发货量</span>
+                                                <div class="dowebok" id="fhl">
+                                                    <ul class="dowebok_u" id="fhzltop">
+                                                            <li class="dowebok_u_li">
+                                                                <ul class="dowebok_u">
+                                                                    <li class="dowebok_x">1</li>
+                                                                    <li class="dowebok_x dowebok_x2"></li>
+                                                                    <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">2</li>
+                                                                        <li class="dowebok_x dowebok_x2"></li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">3</li>
+                                                                      <li class="dowebok_x dowebok_x2"></li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">4</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">5</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">6</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">7</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">8</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">9</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                       
+                                                        <li class="dowebok_u_li">
+                                                          <ul class="dowebok_u">
+                                                              <li class="dowebok_x">10</li>
+                                                              <li class="dowebok_x dowebok_x2">
+                                                            </li>
+                                                              <li class="dowebok_x dowebok_x3">
+                                                                  <span class="dowebok_x3_react"></span>
+                                                                  <span class="sanjiao"></span> 
+                                                              </li>
+                                                          </ul>
+                                                      </li>
+                                                    </ul>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div>
+
+                            <div style="flex-flow:column wrap;flex:1">
+                                    <div class="m_bottom_d1 m_bottom_d3">
+                                            <div class="m_bottom_d1_d1">
+                                                <span >开户总量TOP10</span>
+                                            </div>
+                                            <div class="m_bottom_d1_d2">
+                                                <span class="m_bottom_d1_d2_f1">排名</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f2">燃气公司</span>
+                                                <span class="m_bottom_d1_d2_f1 m_bottom_d1_d2_f3">开户量</span>
+                                                <div class="dowebok" id="khl">
+                                                    <ul class="dowebok_u" id="khzltop">
+                                                            <li class="dowebok_u_li">
+                                                                <ul class="dowebok_u">
+                                                                    <li class="dowebok_x">1</li>
+                                                                    <li class="dowebok_x dowebok_x2"></li>
+                                                                    <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">2</li>
+                                                                        <li class="dowebok_x dowebok_x2"></li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                      <li class="dowebok_x">3</li>
+                                                                      <li class="dowebok_x dowebok_x2"></li>
+                                                                      <li class="dowebok_x dowebok_x3">
+                                                                          <span class="dowebok_x3_react"></span>
+                                                                          <span class="sanjiao"></span> 
+                                                                      </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">4</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">5</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                                    <ul class="dowebok_u">
+                                                                        <li class="dowebok_x">6</li>
+                                                                        <li class="dowebok_x dowebok_x2">
+                                                                      </li>
+                                                                        <li class="dowebok_x dowebok_x3">
+                                                                            <span class="dowebok_x3_react"></span>
+                                                                            <span class="sanjiao"></span> 
+                                                                        </li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">7</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">8</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="dowebok_u_li">
+                                                              <ul class="dowebok_u">
+                                                                  <li class="dowebok_x">9</li>
+                                                                  <li class="dowebok_x dowebok_x2">
+                                                                </li>
+                                                                  <li class="dowebok_x dowebok_x3">
+                                                                      <span class="dowebok_x3_react"></span>
+                                                                      <span class="sanjiao"></span> 
+                                                                  </li>
+                                                              </ul>
+                                                          </li>
+                                                       
+                                                        <li class="dowebok_u_li">
+                                                          <ul class="dowebok_u">
+                                                              <li class="dowebok_x">10</li>
+                                                              <li class="dowebok_x dowebok_x2">
+                                                            </li>
+                                                              <li class="dowebok_x dowebok_x3">
+                                                                  <span class="dowebok_x3_react"></span>
+                                                                  <span class="sanjiao"></span> 
+                                                              </li>
+                                                          </ul>
+                                                      </li>
+                                                    </ul>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+
+            <div style="flex-flow:row wrap;width:100%;background:#062a40;flex:1;overflow:hidden">
+                <div style="width:100%;height:100%;display:flex;flex-flow:column;">
+                   <div style="flex-flow:row;background:#062a40;flex:1;width:98%;margin:0 auto;border-top:1px soid #ccc;">
+                        <div class="f_d">
+                                <p class="f_dz_p02">
+                                    <span class="f_dz_x f_dz_x_d"></span>
+                                    <span class="f_dz_font">燃气公司抄表率实时监测</span>  
+                                </p>
+                        </div>
+                        <div class="f_dm">
+                                <span class="f_dm_f">我们的客户：</span>
+                                <ul class="f_dm_u">
+                                    <li class="f_dm_u_li">集团客户</li>
+                                    <li class="f_dm_u_li">省会客户</li>
+                                </ul>
+                        </div>
+                   </div>
+
+                   <div style="flex-flow:row;flex:4;height:70%">
+                        <div style="width:100%;height:100%;display:flex;flex-flow:row;background:#062a40">
+                            <div style="flex-flow:column;width:30%;height:100%">
+                                    <div class="f_dz">
+                                            <p class="f_dz_p03">
+                                             <span class="f_dz_x"></span>
+                                             <span class="f_dz_font" id="khmd">集团客户名单</span>  
+                                            </p>
+                                          <div class="f_dz_l">
+                                                <!-- 第一层 -->
+                                                <div class="jtkh">
+                                                    <ul class="f_dz_m_n_u" id="jtkh">
+                                                        <!-- <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1"></span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                                <ul class="u">
+                                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1"></span></li>
+                                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                                </ul>
+                                                            </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                                <ul class="u">
+                                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1"></span></li>
+                                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                                </ul>
+                                                        </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                                <ul class="u">
+                                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                                </ul>
+                                                        </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                                <ul class="u">
+                                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                                </ul>
+                                                        </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                                <ul class="u">
+                                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                                </ul>
+                                                        </li>
+
+                                                        <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                       </li>
+
+                                                    <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                    </li>
+                                                    
+                                                      <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">合肥港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                       </li> -->
+                                                    </ul>
+                                                </div>
+                                                <!-- 第二层 -->
+                                                <div class="shkh" >
+                                                  <ul class="f_dz_m_n_u02" id="shkh">
+                                                    <!-- <li class="f_dz_m_n_li">
+                                                        <ul class="u">
+                                                            <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                            <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">杭州港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                        </li>
+
+                                                    <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">大连港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                    </li>
+
+                                                    <li class="f_dz_m_n_li">
+                                                            <ul class="u">
+                                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                            </ul>
+                                                    </li>
+
+                                                    <li class="f_dz_m_n_li">
+                                                        <ul class="u">
+                                                            <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                            <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                        </ul>
+                                                   </li>
+
+                                                   <li class="f_dz_m_n_li">
+                                                    <ul class="u">
+                                                        <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                        <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                    </ul>
+                                                   </li>
+
+                                                   <li class="f_dz_m_n_li">
+                                                    <ul class="u">
+                                                        <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                        <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                    </ul>
+                                            </li>
+
+                                            <li class="f_dz_m_n_li">
+                                                <ul class="u">
+                                                    <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                    <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                                </ul>
+                                           </li>
+
+                                           <li class="f_dz_m_n_li">
+                                            <ul class="u">
+                                                <li class="f_dz_m_n_u_li"><span class="f_dz_m_n_u_li_f1">徐州港华燃气公司</span></li>
+                                                <li class="f_dz_m_n_u_li02"><span class="f_dz_m_n_u_li02_f">当前抄表率：</span><span class="f_dz_m_n_u_li02_f02">99%</span></li>
+                                            </ul>
+                                           </li> -->
+                                                  </ul>
+                                                </div>
+                                          </div>
+                                          <!-- <div class="f_dz_line"></div>     -->
+                                    </div>
+                            </div>
+                            <div style="flex-flow:column;width:70%;height:100%">
+                                <div id="conecharts">
+                                    <div class="containt">
+                                         <div class="f_dn">
+                                            <p class="f_dz_p">
+                                                <span class="f_dz_x"></span>
+                                                <span class="f_dz_font">金卡NB表使用情况</span>  
+                                            </p>
+                                            <div class="f_dn_d">
+                                                <div id="f_dn_d_left"></div>
+                                                <div class="f_dn_d_right">
+                                                  <!-- <p class="f_dn_d_right_p"><span class="f_dn_d_right_p_f01">:190000</span><span class="f_dn_d_right_p_f02">总开户数</span><span class="f_dn_d_right_p_f01">100000</span></p>
+                                                  <p class="f_dn_d_right_p02"><span class="f_dn_d_right_p_f01">:20000</span><span class="f_dn_d_right_p_f02">总发货数</span><span class="f_dn_d_right_p_f01">100000</span></p>
+                                                   -->
+                                                   <ul class="f_dn_d_right_u u">
+                                                       <li class="f_dn_d_right_u_li"><span>已抄表数量</span> <span id="ycbs"></span></li>
+                                                       <li class="f_dn_d_right_u_li"><span>总开户数量</span> <span id="zkhs"></span></li>
+                                                   </ul>
+                                                   <ul class="f_dn_d_right_u02 u">
+                                                       <li class="f_dn_d_right_u02_li02"><span>休眠表数量 </span><span id="xmbs"></span></li>
+                                                       <li class="f_dn_d_right_u02_li02"><span>总发货数量 </span><span id="zfhl"></span></li>
+                                                   </ul>
+                                                </div>
+                                                <!-- <div id="f_dn_d_left"></div> -->
+                                           </div>      
+                                            <div class="f_dn_d_xian"></div>
+                                                <div class="piex">
+                                                  <p class="piex_font">30日抄表率折线图</p>
+                                                  <div id="piex"></div>  
+                                               </div> 
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+</body>
+<script src="js/echarts.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/jquery.liMarquee.js"></script>
+<script src="js/exhition.js"></script>
+</html>
